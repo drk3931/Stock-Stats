@@ -18,6 +18,11 @@
 <body>
 
   <h1 class="text-center">Stock Comparison Tool</h1>
+  <div id="footer" class="text-center">
+    Created by Deepak Khemraj <br>
+    <a href="drk3931@gmail.com">drk3931@gmail.com</a>
+  </div>
+
   <div id="app" class="container-fluid">
     <div class="row">
 
@@ -63,9 +68,7 @@
     </div>
 
 
-    <div id="footer" class="navbar-fixed-bottom">
-      Created by Deepak Khemraj <br>
-      <a href="drk3931@gmail.com">drk3931@gmail.com</a></div>
+
 
   </div>
 
@@ -81,7 +84,7 @@
   var app = new Vue({
     el: '#app',
     data: {
-      APP_ENDPOINT:'https://stock-stats.herokuapp.com/stockData',
+      APP_ENDPOINT: 'https://stock-stats.herokuapp.com/stockData',
       symbol1: 'DIS',
       symbol2: 'NFLX',
       errorMessage: undefined
@@ -93,7 +96,7 @@
           .post(this.APP_ENDPOINT, { 'symbol1': this.symbol1, 'symbol2': this.symbol2 })
           .then((response) => {
             $("#graph").html(response.data);
-            
+
           }).catch(error => {
             if (error.response) {
 
