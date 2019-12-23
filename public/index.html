@@ -1,0 +1,136 @@
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"
+    integrity="sha256-XmdRbTre/3RulhYk/cOBUMpYlaAp2Rpo/s556u0OIKk=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+  <h1 class="text-center">Stock Comparison Tool</h1>
+  <div id="app" class="container-fluid">
+    <div class="row">
+
+      <div id="sidebar" class="col-3 d-flex flex-column">
+
+        <div class="form-group">
+          <label for="exampleFormControlSelect1"><strong>Enter</strong></label>
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option>Adjusted Closing Price Percent Change</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="stock1">Stock 1</label>
+          <div class="d-flex">
+            <input type="text" class="form-control mx-2" id="stock1" placeholder="Enter Stock Symbol" v-model="symbol1">
+            <button v-on:click="submit()" type="button" class="btn btn-primary">Enter</button>
+
+          </div>
+
+        </div>
+        <div class="form-group">
+          <label for="stock2">Stock 2</label>
+          <div class="d-flex">
+
+            <input type="text" class="form-control mx-2" id="stock2" placeholder="Enter Stock Symbol" v-model="symbol2">
+            <button v-on:click="submit()" type="button" class="btn btn-primary">Enter</button>
+          </div>
+        </div>
+
+        <div class="alert alert-danger" role="alert" v-if="errorMessage">
+          {{errorMessage}}
+        </div>
+
+      </div>
+
+      <div class="col-9">
+        <div id="graph">
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div id="footer" class="navbar-fixed-bottom">
+      Created by Deepak Khemraj <br>
+      <a href="drk3931@gmail.com">drk3931@gmail.com</a></div>
+
+  </div>
+
+
+</body>
+
+
+
+<script>
+
+  'use strict';
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      APP_ENDPOINT:'https://stock-stats.herokuapp.com/stockData',
+      symbol1: 'DIS',
+      symbol2: 'NFLX',
+      errorMessage: undefined
+    },
+    methods: {
+      submit() {
+        this.errorMessage = undefined;
+        axios
+          .post(this.APP_ENDPOINT, { 'symbol1': this.symbol1, 'symbol2': this.symbol2 })
+          .then((response) => {
+            $("#graph").html(response.data);
+            
+          }).catch(error => {
+            if (error.response) {
+
+              this.errorMessage = error.response.data['error']
+
+            }
+          });
+
+      }
+    },
+    mounted() {
+
+      axios.post
+
+      axios
+        .post(this.APP_ENDPOINT, { 'symbol1': this.symbol1, 'symbol2': this.symbol2 })
+        .then((response) => {
+          $("#graph").html(response.data);
+        });
+    }
+
+  });
+</script>
+
+<style>
+  #sidebar {
+    margin-top: 100px;
+  }
+
+  #graph {
+    margin-top: 0 !important;
+    max-width: 100%;
+  }
+
+  svg {
+    max-width: 100%;
+  }
+</style>
+
+</html>
