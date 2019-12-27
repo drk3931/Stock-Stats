@@ -59,9 +59,8 @@
 
       </div>
 
-      <div class="col-9">
-        <div class="loader" id="loading"></div>
-
+      <div class="col-9" id="main">
+        <div class="loader" id="loading" v-if="loading"></div>
 
         <div id="graph">
 
@@ -132,7 +131,7 @@
 <style>
   .loader {
     border: 16px solid #f3f3f3;
-    border-top: 16px solid darkred;
+    border-top: 16px solid lightsteelblue;
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -151,6 +150,8 @@
 
   #sidebar {
     margin-top: 100px;
+    min-height: 800px;
+
   }
 
   #graph {
@@ -168,6 +169,10 @@
 
   body {
     min-width: 1024px;
+    min-height: 800px;
+  }
+
+  #main{
     min-height: 800px;
   }
 </style>
