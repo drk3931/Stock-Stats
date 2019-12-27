@@ -62,7 +62,8 @@
       <div class="col-9" id="main">
         <div class="loader" id="loadingChart" v-if="loadingChart"></div>
 
-        <div id="graph"></div>
+        <div v-if="!loading" id="graph"></div>
+
       </div>
 
     </div>
