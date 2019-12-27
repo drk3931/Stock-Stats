@@ -39,7 +39,7 @@
           <label for="stock1">Stock 1</label>
           <div class="d-flex">
             <input type="text" class="form-control mx-2" id="stock1" placeholder="Enter Stock Symbol" v-model="symbol1">
-            <button v-on:click="submit()" type="button" class="btn btn-primary">Enter</button>
+            <button :disabled="loadingChart" v-on:click="submit()" type="button" class="btn btn-primary">Enter</button>
 
           </div>
 
@@ -49,7 +49,7 @@
           <div class="d-flex">
 
             <input type="text" class="form-control mx-2" id="stock2" placeholder="Enter Stock Symbol" v-model="symbol2">
-            <button v-on:click="submit()" type="button" class="btn btn-primary">Enter</button>
+            <button :disabled="loadingChart" v-on:click="submit()" type="button" class="btn btn-primary">Enter</button>
           </div>
         </div>
 
@@ -116,18 +116,7 @@
 
       this.loadingChart = true;
 
-      axios
-        .post(this.APP_ENDPOINT, { 'symbol1': this.symbol1, 'symbol2': this.symbol2 })
-        .then((response) => {
-
-          $("#graph").html(response.data);
-          this.loadingChart = false;
-        }).catch(err=>{
-
-          this.loadingChart = false;
-          
-          
-        });
+      this.submit();
     }
 
   });
