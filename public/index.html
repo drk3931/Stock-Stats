@@ -53,16 +53,16 @@
           </div>
         </div>
 
-        <div class="alert alert-danger" role="alert" v-if="errorMessage">
+        <div class="alert alert-danger" role="alert" v-show="errorMessage">
           {{errorMessage}}
         </div>
 
       </div>
 
       <div class="col-9" id="main">
-        <div class="loader" id="loadingChart" v-if="loadingChart"></div>
+        <div class="loader" id="loadingChart" v-show="loadingChart"></div>
 
-        <div v-if="!loading" id="graph"></div>
+        <div id="graph"></div>
 
       </div>
 
@@ -95,6 +95,8 @@
       submit() {
         this.loadingChart = true;
         this.errorMessage = undefined;
+        $("#graph").empty();
+
         axios
           .post(this.APP_ENDPOINT, { 'symbol1': this.symbol1, 'symbol2': this.symbol2 })
           .then((response) => {
@@ -163,6 +165,7 @@
     position:absolute;
     left:0; right:0;
     top:0; bottom:0;
+    z-index: 1000;
   }
 
   body {
