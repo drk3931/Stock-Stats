@@ -17,7 +17,7 @@
 
 <body>
 
-  <h1 class="text-center">Stock Comparison Tool</h1>
+  <h2 class="text-center">Stock-Stats Comparison Tool</h2>
   <div id="footer" class="text-center">
     Created by Deepak Khemraj <br>
     <a href="drk3931@gmail.com">drk3931@gmail.com</a>
@@ -60,11 +60,9 @@
       </div>
 
       <div class="col-9" id="main">
-        <div class="loader" id="loading" v-if="loadingChart"></div>
+        <div class="loader" id="loadingChart" v-if="loadingChart"></div>
 
-        <div id="graph">
-
-        </div>
+        <div id="graph" v-if="!loadingChart"></div>
       </div>
 
     </div>
@@ -90,7 +88,7 @@
       symbol1: 'DIS',
       symbol2: 'NFLX',
       errorMessage: undefined,
-      loadingChart: false
+      loadingChart: false,
     },
     methods: {
       submit() {
@@ -116,12 +114,19 @@
     },
     mounted() {
 
-      axios.post
+      this.loadingChart = true;
 
       axios
         .post(this.APP_ENDPOINT, { 'symbol1': this.symbol1, 'symbol2': this.symbol2 })
         .then((response) => {
+
           $("#graph").html(response.data);
+          this.loadingChart = false;
+        }).catch(err=>{
+
+          this.loadingChart = false;
+          
+          
         });
     }
 
@@ -163,8 +168,11 @@
     max-width: 100%;
   }
 
-  #loading {
-    margin: auto
+  #loadingChart {
+    margin:auto;
+    position:absolute;
+    left:0; right:0;
+    top:0; bottom:0;
   }
 
   body {
@@ -173,7 +181,7 @@
   }
 
   #main{
-    min-height: 800px;
+    max-height: 800px;
   }
 </style>
 
