@@ -110,7 +110,8 @@
         axios
           .post(this.APP_ENDPOINT, { 'symbol1': this.symbol1, 'symbol2': this.symbol2 })
           .then((response) => {
-            $("#graph").html(response.chart);
+
+            $("#graph").html(response.data);
             this.loadingChart = false;
 
           }).catch(error => {
