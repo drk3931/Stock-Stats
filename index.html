@@ -32,23 +32,28 @@
           <label for="exampleFormControlSelect1"><strong>Set View</strong></label>
           <select class="form-control" id="exampleFormControlSelect1">
             <option>Adjusted Closing Price Percent Change</option>
+
           </select>
         </div>
 
 
+
+
         <div class="row">
+          <div class="form-group col-12">
+            <p>Many securities are often correlated in surpising ways even if they belong to different sectors. Use this view to enter two symbols and find out exactly how close the percent changes between themare. </p>
+          </div>
+
           <div class="form-group col-6">
             <label for="stock1">Symbol 1</label>
             <div>
-              <input type="text" class="form-control" id="stock1" placeholder="Enter Stock Symbol"
-                v-model="symbol1">
+              <input type="text" class="form-control" id="stock1" placeholder="Enter Stock Symbol" v-model="symbol1">
             </div>
           </div>
           <div class="form-group col-6">
             <label for="stock2">Symbol 2</label>
             <div>
-              <input type="text" class="form-control" id="stock2" placeholder="Enter Stock Symbol"
-                v-model="symbol2">
+              <input type="text" class="form-control" id="stock2" placeholder="Enter Stock Symbol" v-model="symbol2">
             </div>
           </div>
 
@@ -138,9 +143,9 @@
     width: 120px;
     height: 120px;
     animation: spin 2s linear infinite;
-    margin:auto;
+    margin: auto;
     margin-top: 200px;
-    
+
   }
 
   @keyframes spin {
@@ -171,8 +176,6 @@
     min-width: 1024px;
     max-height: 800px;
   }
-
-
 </style>
 
 </html>
